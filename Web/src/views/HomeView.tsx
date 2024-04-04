@@ -1,40 +1,35 @@
-import { Box, Container, Grid, Typography } from '@mui/material';
+
+
+import Timeline from '@mui/lab/Timeline';
+import TimelineItem from '@mui/lab/TimelineItem';
+import TimelineSeparator from '@mui/lab/TimelineSeparator';
+import TimelineConnector from '@mui/lab/TimelineConnector';
+import TimelineContent from '@mui/lab/TimelineContent';
+import TimelineDot from '@mui/lab/TimelineDot';
 
 export default function HomeView() {
   return (
-    <Box>
-      <Box
-        sx={{
-          width: '100%',
-          height: '36rem',
-          backgroundColor: 'rgb(247, 249, 252)',
-          p: 2,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Container style={{ maxWidth: '100rem' }}>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Box
-                sx={{
-                  height: '30rem',
-                  p: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Typography variant="h3" component="h1">
-                  Welcome to
-                </Typography>
-              </Box>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-    </Box>
+      <Timeline>
+          <TimelineItem>
+              <TimelineSeparator>
+                  <TimelineDot />
+                  <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent>Eat</TimelineContent>
+          </TimelineItem>
+          <TimelineItem>
+              <TimelineSeparator>
+                  <TimelineDot />
+                  <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent>Code</TimelineContent>
+          </TimelineItem>
+          <TimelineItem>
+              <TimelineSeparator>
+                  <TimelineDot />
+              </TimelineSeparator>
+              <TimelineContent>Sleep</TimelineContent>
+          </TimelineItem>
+      </Timeline>
   );
 }
