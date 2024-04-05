@@ -1,37 +1,38 @@
-import { To, useNavigate} from 'react-router-dom';
-import {Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import {useState} from "react";
+import { Drawer, List, ListItem, ListItemText, IconButton } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu'; // 菜单图标，用于触发侧边栏打开和关闭
+import { useState } from "react";
 
 export default function Header() {
-    const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate(); // 使用useNavigate钩子
+    const [drawerWidth, setDrawerWidth] = useState(240); // 初始宽度设置为240px
+    const [isOpen] = useState(true);
 
-    const toggleDrawer = (open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
-        setIsOpen(open);
-    };
-
-    // 定义一个函数，根据传入的路径来导航
-    const handleNavigate = (path: To) => {
-        navigate(path);
-        setIsOpen(false); // 可选：导航后关闭Drawer
+    // 切换侧边栏宽度的函数
+    const toggleDrawerSize = () => {
+        setDrawerWidth(drawerWidth === 240 ? 60 : 240); // 如果当前宽度是240px，则缩小到60px，否则扩大到240px
     };
 
     return (
-        <div>
-            <IconButton onClick={toggleDrawer(true)}>
+        <div style={{ display: 'flex' }}>
+            <IconButton onClick={toggleDrawerSize} sx={{ marginLeft: drawerWidth }}>
                 <MenuIcon />
             </IconButton>
-            <Drawer anchor="left" open={isOpen} onClose={toggleDrawer(false)}>
+            <Drawer
+                variant="persistent"
+                anchor="left"
+                open={isOpen}
+                sx={{
+                    width: drawerWidth, // 使用状态变量作为宽度值
+                    flexShrink: 0,
+                    '& .MuiDrawer-paper': {
+                        width: drawerWidth, // 使用状态变量作为宽度值
+                        boxSizing: 'border-box',
+                    },
+                }}
+            >
+                {/* Drawer items */}
                 <List>
-                    {['Item 1', 'Item 2', 'Item 3'].map((text, index) => (
-                        <ListItem button key={text} onClick={() => handleNavigate(`/path${index + 1}`)}>
-                            <ListItemIcon>
-                                {/* 这里可以根据需要放置图标 */}
-                            </ListItemIcon>
+                    {['Item 1', 'Item 2', 'Item 3'].map((text) => (
+                        <ListItem button key={text}>
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
