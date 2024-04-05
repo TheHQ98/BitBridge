@@ -111,12 +111,14 @@ export default function AddEvent() {
                     onChange={(e) => setLocation(e.target.value)}
                 />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={['DateTimePicker', 'DateTimePicker']}>
+                    <DemoContainer components={['DateTimePicker']}>
                         <DateTimePicker
                             label="Start Time"
                             value={startTimeValue}
                             onChange={(newValue) => setStartTimeValue(newValue)}
                         />
+                    </DemoContainer>
+                    <DemoContainer components={['DateTimePicker']}>
                         <DateTimePicker
                             label="End Time"
                             value={endTimeValue}
