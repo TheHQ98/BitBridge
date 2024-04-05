@@ -23,7 +23,8 @@
     "react-dom": "^18.2.0",
     "react-media-recorder": "^1.6.6",
     "react-router-dom": "^6.15.0",
-    "zustand": "^4.4.3"
+    "zustand": "^4.4.3",
+    "@types/uuid": "^9.0.8"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

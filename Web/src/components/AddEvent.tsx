@@ -12,6 +12,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import {Dayjs} from 'dayjs';
 import {DemoContainer} from "@mui/x-date-pickers/internals/demo";
+import {createEvent, getEventsJson} from "../utils.tsx"
 
 
 export default function AddEvent() {
@@ -23,37 +24,31 @@ export default function AddEvent() {
     const [notes, setNotes] = useState('');
 
 
-    const handleClickOpen = () => {
+    const handleButtonClickOpen = () => {
         setOpen(true);
     };
 
-    const handleClose = () => {
+    const handleDialogClose = () => {
         setOpen(false);
     };
 
-    const eventDetails = {
-        title: title,
-        location: location,
-        startTime: startTimeValue ? startTimeValue.format('YYYY-MM-DD HH:mm:ss') : '',
-        endTime: endTimeValue ? endTimeValue.format('YYYY-MM-DD HH:mm:ss') : '',
-        notes: notes
-    };
-
-    const eventDetailsString = JSON.stringify(eventDetails);
 
     const handleAdd = () => {
         if (title==null || startTimeValue == null || endTimeValue == null) {
             return;
         }
-        // console.log('Title:', title);
-        // console.log('Location:', location);
-        // console.log('Start Time:', startTimeValue.format('YYYY-MM-DD HH:mm:ss'));
-        // console.log('End Time:', endTimeValue.format('YYYY-MM-DD HH:mm:ss'));
-        // console.log("Notes:", notes);
 
-        console.log(JSON.stringify(eventDetails, null, 2));
-        localStorage.setItem('newEventDetails', eventDetailsString);
-        handleClose();
+        createEvent(title, location,
+            startTimeValue ? startTimeValue.format('YYYY-MM-DD HH:mm:ss') : '',
+            endTimeValue ? endTimeValue.format('YYYY-MM-DD HH:mm:ss') : '',
+            notes);
+
+        console.log(getEventsJson());
+        localStorage.setItem('newEventDetails', getEventsJson());
+
+
+
+        handleDialogClose();
         setTitle('');
         setLocation('');
         setStartTimeValue(null);
@@ -66,13 +61,13 @@ export default function AddEvent() {
                 variant="contained"
                 color="primary"
                 style={{ marginRight: '1rem' }}
-                onClick={handleClickOpen}
+                onClick={handleButtonClickOpen}
             >
                 Add new event
             </Button>
             <Dialog
                 open={open}
-                onClose={handleClose}
+                onClose={handleDialogClose}
                 aria-labelledby="dialog-title"
                 aria-describedby="dialog-description"
                 sx={{
@@ -139,7 +134,7 @@ export default function AddEvent() {
                 />
                 <DialogActions>
                 <Button onClick={handleAdd}>Add</Button>
-                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleDialogClose}>Cancel</Button>
                 </DialogActions>
             </Dialog>
         </Box>

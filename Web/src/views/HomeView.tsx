@@ -35,8 +35,8 @@ export default function HomeView() {
                         <TimelineContent>Sleep</TimelineContent>
                     </TimelineItem>
                 </Timeline>
-                <AddEvent></AddEvent>
             </Container>
+            <AddEvent></AddEvent>
         </>
 
 
