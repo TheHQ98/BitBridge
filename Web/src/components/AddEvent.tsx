@@ -31,15 +31,28 @@ export default function AddEvent() {
         setOpen(false);
     };
 
+    const eventDetails = {
+        title: title,
+        location: location,
+        startTime: startTimeValue ? startTimeValue.format('YYYY-MM-DD HH:mm:ss') : '',
+        endTime: endTimeValue ? endTimeValue.format('YYYY-MM-DD HH:mm:ss') : '',
+        notes: notes
+    };
+
+    const eventDetailsString = JSON.stringify(eventDetails);
+
     const handleAdd = () => {
         if (title==null || startTimeValue == null || endTimeValue == null) {
             return;
         }
-        console.log('Title:', title);
-        console.log('Location:', location);
-        console.log('Start Time:', startTimeValue.format('YYYY-MM-DD HH:mm:ss'));
-        console.log('End Time:', endTimeValue.format('YYYY-MM-DD HH:mm:ss'));
-        console.log("Notes:", notes);
+        // console.log('Title:', title);
+        // console.log('Location:', location);
+        // console.log('Start Time:', startTimeValue.format('YYYY-MM-DD HH:mm:ss'));
+        // console.log('End Time:', endTimeValue.format('YYYY-MM-DD HH:mm:ss'));
+        // console.log("Notes:", notes);
+
+        console.log(JSON.stringify(eventDetails, null, 2));
+        localStorage.setItem('newEventDetails', eventDetailsString);
         handleClose();
         setTitle('');
         setLocation('');
