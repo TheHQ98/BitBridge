@@ -6,35 +6,39 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import AddEvent from "../components/AddEvent.tsx";
 import {Container} from "@mui/material";
+import DateHeader from "../components/DateHeader.tsx";
 
 export default function HomeView() {
-  return (
-      <Container>
-          <Timeline>
-              <TimelineItem>
-                  <TimelineSeparator>
-                      <TimelineDot />
-                      <TimelineConnector />
-                  </TimelineSeparator>
-                  <TimelineContent>Eat</TimelineContent>
-              </TimelineItem>
-              <TimelineItem>
-                  <TimelineSeparator>
-                      <TimelineDot />
-                      <TimelineConnector />
-                  </TimelineSeparator>
-                  <TimelineContent>Code</TimelineContent>
-              </TimelineItem>
-              <TimelineItem>
-                  <TimelineSeparator>
-                      <TimelineDot />
-                  </TimelineSeparator>
-                  <TimelineContent>Sleep</TimelineContent>
-              </TimelineItem>
-          </Timeline>
-          <AddEvent></AddEvent>
-      </Container>
+    return (
+        <>
+            <DateHeader></DateHeader>
+            <Container>
+                <Timeline>
+                    <TimelineItem>
+                        <TimelineSeparator>
+                            <TimelineDot/>
+                            <TimelineConnector/>
+                        </TimelineSeparator>
+                        <TimelineContent>Eat</TimelineContent>
+                    </TimelineItem>
+                    <TimelineItem>
+                        <TimelineSeparator>
+                            <TimelineDot/>
+                            <TimelineConnector/>
+                        </TimelineSeparator>
+                        <TimelineContent>Code</TimelineContent>
+                    </TimelineItem>
+                    <TimelineItem>
+                        <TimelineSeparator>
+                            <TimelineDot/>
+                        </TimelineSeparator>
+                        <TimelineContent>Sleep</TimelineContent>
+                    </TimelineItem>
+                </Timeline>
+                <AddEvent></AddEvent>
+            </Container>
+        </>
 
 
-  );
+    );
 }
