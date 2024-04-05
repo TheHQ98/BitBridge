@@ -4,7 +4,9 @@ import {Event} from "./entity.ts";
 const events: Event[] = [];
 
 // create a new event, save into events
-export function createEvent(title: string, location: string, startTime: string, endTime: string, notes: string = ''): Event {
+export function createEvent(title: string, location: string,
+                            startTime: string, endTime: string,
+                            notes: string = ''): Event {
     const newEvent: Event = {
         id: uuidv4(),
         title: title,
@@ -27,6 +29,7 @@ export function getEventsJson(): string {
     return JSON.stringify(events, null, 2);
 }
 
+// get event data from local storage
 export function initializeEvents(): void {
     const exist = localStorage.getItem("newEventDetails");
     if (exist != null) {
