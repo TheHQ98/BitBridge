@@ -1,28 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IconButton, Button, Stack, Typography, Grid } from '@mui/material';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 type DateHeaderProps = {
-    // Define additional props if necessary
-    startOfWeek?:number;
+    startOfWeek?: number;
+    selectedDate: Date;
+    onDateSelect: (newDate: Date) => void;
 };
 
-const DateHeader: React.FC<DateHeaderProps> = ({ startOfWeek = 1 }) => {
-    const [currentWeek, setCurrentWeek] = useState<Date[]>(generateWeekDays(new Date(), startOfWeek));
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+const DateHeader: React.FC<DateHeaderProps> = ({ startOfWeek = 1, selectedDate, onDateSelect }) => {
+    const [currentWeek, setCurrentWeek] = React.useState<Date[]>(generateWeekDays(selectedDate, startOfWeek));
 
-    function generateWeekDays(startDate: Date, startOfWeek: number = 1): Date[] {
+    function generateWeekDays(startDate: Date, startOfWeek: number): Date[] {
         const start = new Date(startDate);
-        // Adjust to start of the week based on the provided startOfWeek
         const day = start.getDay();
-        const difference = start.getDate() - day + (day < startOfWeek ? -7 : 0) + startOfWeek;
+        const difference = start.getDate() - day + (day < startOfWeek ? -6 : 1);
         start.setDate(difference);
 
         return Array.from({ length: 7 }, (_, index) =>
             new Date(start.getFullYear(), start.getMonth(), start.getDate() + index));
     }
-
 
     const handleWeekChange = (direction: 'previous' | 'next') => {
         setCurrentWeek(prevWeek => {
@@ -32,9 +30,9 @@ const DateHeader: React.FC<DateHeaderProps> = ({ startOfWeek = 1 }) => {
         });
     };
 
-    const handleDateSelect = (date: Date) => {
-        setSelectedDate(date);
-    };
+    React.useEffect(() => {
+        setCurrentWeek(generateWeekDays(selectedDate, startOfWeek)); // Regenerate week days when selectedDate changes
+    }, [selectedDate, startOfWeek]);
 
     return (
         <Stack spacing={2}>
@@ -48,20 +46,20 @@ const DateHeader: React.FC<DateHeaderProps> = ({ startOfWeek = 1 }) => {
                 {currentWeek.map((date, index) => (
                     <Grid item xs key={index} style={{ display: 'flex', justifyContent: 'center' }}>
                         <Button
-                            variant={selectedDate && date.getTime() === selectedDate.getTime() ? "contained" : "outlined"}
+                            variant={selectedDate.toDateString() === date.toDateString() ? "contained" : "outlined"}
                             style={{
-                                minWidth: 60, // Adjusted for more content
-                                height: 60, // Adjusted for more content
+                                minWidth: 60,
+                                height: 60,
                                 borderRadius: '50%',
                                 display: 'flex',
                                 flexDirection: 'column',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                padding: 0, // Remove padding to fit content
-                                backgroundColor: selectedDate && date.getTime() === selectedDate.getTime() ? '#1976d2' : undefined,
-                                color: selectedDate && date.getTime() === selectedDate.getTime() ? '#fff' : undefined,
+                                padding: 0,
+                                backgroundColor: selectedDate.toDateString() === date.toDateString() ? '#1976d2' : undefined,
+                                color: selectedDate.toDateString() === date.toDateString() ? '#fff' : undefined,
                             }}
-                            onClick={() => handleDateSelect(date)}
+                            onClick={() => onDateSelect(date)}
                         >
                             <Typography variant="caption" component="div">
                                 {date.toLocaleDateString('default', { weekday: 'short' })}
@@ -81,3 +79,4 @@ const DateHeader: React.FC<DateHeaderProps> = ({ startOfWeek = 1 }) => {
 };
 
 export default DateHeader;
+

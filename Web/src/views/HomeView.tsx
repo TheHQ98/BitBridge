@@ -7,36 +7,18 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import AddEvent from "../components/AddEvent.tsx";
 import {Container} from "@mui/material";
 import DateHeader from "../components/DateHeader.tsx";
+import DailyTaskChain from "../components/DailyTaskChain.tsx";
+import {useState} from "react";
 
 export default function HomeView() {
+    const [selectedDate, setSelectedDate] = useState(new Date());
+
+
     return (
         <>
-            <DateHeader></DateHeader>
-            <Container>
-                <Timeline>
-                    <TimelineItem>
-                        <TimelineSeparator>
-                            <TimelineDot/>
-                            <TimelineConnector/>
-                        </TimelineSeparator>
-                        <TimelineContent>Eat</TimelineContent>
-                    </TimelineItem>
-                    <TimelineItem>
-                        <TimelineSeparator>
-                            <TimelineDot/>
-                            <TimelineConnector/>
-                        </TimelineSeparator>
-                        <TimelineContent>Code</TimelineContent>
-                    </TimelineItem>
-                    <TimelineItem>
-                        <TimelineSeparator>
-                            <TimelineDot/>
-                        </TimelineSeparator>
-                        <TimelineContent>Sleep</TimelineContent>
-                    </TimelineItem>
-                </Timeline>
-            </Container>
-            <AddEvent></AddEvent>
+            <DateHeader selectedDate={selectedDate} onDateSelect={setSelectedDate}/>
+            <DailyTaskChain selectedDate={selectedDate} />
+            <AddEvent/>
         </>
 
 
