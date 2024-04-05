@@ -27,8 +27,11 @@ export function createEvent(title: string, location: string, startTime: string, 
         notes: notes,
         nextEvent: null
     };
-
-    events.push(newEvent);
+    const eventExists = events.some(event => event.id === newEvent.id);
+    if (!eventExists) {
+        events.push(newEvent);
+        localStorage.setItem("newEventDetails", JSON.stringify(events));
+    }
     return newEvent;
 }
 
