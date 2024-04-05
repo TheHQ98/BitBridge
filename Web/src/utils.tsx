@@ -1,20 +1,7 @@
 import {v4 as uuidv4} from 'uuid';
-
-interface Event {
-    id: string;
-    title: string;
-    location: string;
-    startTime: string;
-    endTime: string;
-    notes: string;
-    nextEvent: string | null;
-}
+import {Event} from "./entity.ts";
 
 const events: Event[] = [];
-
-export function generateId(): string {
-    return uuidv4();
-}
 
 // create a new event, save into events
 export function createEvent(title: string, location: string, startTime: string, endTime: string, notes: string = ''): Event {
