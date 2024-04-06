@@ -1,4 +1,4 @@
-export interface Event {
+export interface Task {
     id: string;
     title: string;
     location: string;

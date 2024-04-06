@@ -11,8 +11,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import {Dayjs} from 'dayjs';
-import {createEvent, getEventsJson} from "../utils.tsx"
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import {DemoContainer} from "@mui/x-date-pickers/internals/demo";
+import {createEvent, getEventsJsonStr} from "../utils.tsx"
+
 
 export default function AddEvent() {
     const [title, setTitle] = useState('');
@@ -42,8 +43,8 @@ export default function AddEvent() {
             endTimeValue ? endTimeValue.format('YYYY-MM-DD HH:mm:ss') : '',
             notes);
 
-        console.log(getEventsJson());
-        localStorage.setItem('newEventDetails', getEventsJson());
+        console.log(getEventsJsonStr());
+        localStorage.setItem('newEventDetails', getEventsJsonStr());
 
 
 
@@ -105,22 +106,21 @@ export default function AddEvent() {
                     onChange={(e) => setLocation(e.target.value)}
                 />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DemoContainer components={['DateTimePicker']}>
-                            <DateTimePicker
-                                label="Start Time"
-                                value={startTimeValue}
-                                onChange={(newValue) => setStartTimeValue(newValue)}
-                            />
-                        </DemoContainer>
-                        <DemoContainer components={['DateTimePicker']}>
-                            <DateTimePicker
-                                label="End Time"
-                                value={endTimeValue}
-                                onChange={(newValue) => setEndTimeValue(newValue)}
-                                minDateTime={startTimeValue || undefined}
-                            />
-                        </DemoContainer>
-
+                    <DemoContainer components={['DateTimePicker']}>
+                        <DateTimePicker
+                            label="Start Time"
+                            value={startTimeValue}
+                            onChange={(newValue) => setStartTimeValue(newValue)}
+                        />
+                    </DemoContainer>
+                    <DemoContainer components={['DateTimePicker']}>
+                        <DateTimePicker
+                            label="End Time"
+                            value={endTimeValue}
+                            onChange={(newValue) => setEndTimeValue(newValue)}
+                            minDateTime={startTimeValue || undefined}
+                        />
+                    </DemoContainer>
                 </LocalizationProvider>
                 <TextField
                     margin="normal"

@@ -1,13 +1,11 @@
 import {v4 as uuidv4} from 'uuid';
-import {Event} from "./entity.ts";
+import {Task} from "./entity.ts";
 
-const events: Event[] = [];
+const events: Task[] = [];
 
 // create a new event, save into events
-export function createEvent(title: string, location: string,
-                            startTime: string, endTime: string,
-                            notes: string = ''): Event {
-    const newEvent: Event = {
+export function createEvent(title: string, location: string, startTime: string, endTime: string, notes: string = ''): Task {
+    const newEvent: Task = {
         id: uuidv4(),
         title: title,
         location: location,
@@ -25,11 +23,14 @@ export function createEvent(title: string, location: string,
 }
 
 // get all event
-export function getEventsJson(): string {
+export function getEventsJsonStr(): string {
     return JSON.stringify(events, null, 2);
 }
 
-// get event data from local storage
+export function getEventsJson(){
+    return localStorage.getItem("newEventDetails");
+}
+
 export function initializeEvents(): void {
     const exist = localStorage.getItem("newEventDetails");
     if (exist != null) {
@@ -38,7 +39,8 @@ export function initializeEvents(): void {
         if (Array.isArray(storedEvents) && storedEvents.length > 0) {
             events.push(...storedEvents);
         }
-        localStorage.removeItem("newEventDetails");
+        // localStorage.removeItem("newEventDetails");
     }
-
 }
+
+

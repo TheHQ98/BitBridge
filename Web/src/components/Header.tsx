@@ -1,43 +1,90 @@
-import { Drawer, List, ListItem, ListItemText, IconButton } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu'; // 菜单图标，用于触发侧边栏打开和关闭
-import { useState } from "react";
+import React, { useState } from 'react';
+import { Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton, Box } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import AddEvent from "./AddEvent.tsx";
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
-    const [drawerWidth, setDrawerWidth] = useState(240); // 初始宽度设置为240px
-    const [isOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
+    const [isWide, setIsWide] = useState(false); // 新增状态用于控制宽度
 
-    // 切换侧边栏宽度的函数
-    const toggleDrawerSize = () => {
-        setDrawerWidth(drawerWidth === 240 ? 60 : 240); // 如果当前宽度是240px，则缩小到60px，否则扩大到240px
+    const navigate = useNavigate();
+
+    const toggleDrawer = (open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
+        setIsOpen(open);
+    };
+
+    const handleNavigate = (path) => {
+        navigate(path);
+        setIsOpen(false);
+    };
+
+    const handleToggleWidth = () => {
+        setIsWide(!isWide);
     };
 
     return (
-        <div style={{ display: 'flex' }}>
-            <IconButton onClick={toggleDrawerSize} sx={{ marginLeft: drawerWidth }}>
-                <MenuIcon />
-            </IconButton>
-            <Drawer
-                variant="persistent"
-                anchor="left"
-                open={isOpen}
+        <Box
+            sx={{
+                position: 'fixed', // 使用 position: fixed
+                top: 0,
+                left: 0,
+                width: isWide ? '40vw' : '10vw',
+                backgroundColor: 'pink',
+                height: '100vh',
+                transition: 'width 0.3s ease',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center', // 将内容水平居中
+            }}
+        >
+            <Box
                 sx={{
-                    width: drawerWidth, // 使用状态变量作为宽度值
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
-                        width: drawerWidth, // 使用状态变量作为宽度值
-                        boxSizing: 'border-box',
-                    },
+                    maxHeight: 'calc(100vh - 48px)', // 减去 Header 的高度
+                    width: '100%', // 使滚动区域填满 Header 宽度
                 }}
             >
-                {/* Drawer items */}
                 <List>
-                    {['Item 1', 'Item 2', 'Item 3'].map((text) => (
-                        <ListItem button key={text}>
-                            <ListItemText primary={text} />
+                    <ListItem sx={{ height: '3vw' }} />
+                    {['Item 1', 'Item 2', 'Item 3', 'Item 1', 'Item 2', 'Item 3', 'Item 1', 'Item 2', 'Item 3'].map((text, index) => (
+                        <ListItem button key={text} onClick={() => handleNavigate(`/path${index + 1}`)}>
+                            <ListItemText sx = {{
+                                textAlign: 'center',
+                                height: isWide ? '3vw' : '10px',
+                            }} primary={text}/>
                         </ListItem>
                     ))}
                 </List>
-            </Drawer>
-        </div>
+            </Box>
+            <Box
+                sx={{
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                }}
+            >
+                <IconButton onClick={handleToggleWidth}>
+                    <MenuIcon />
+                </IconButton>
+            </Box>
+            <Box
+                sx={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    paddingBottom: '16px',
+                    width: '100%',
+                    transition: 'padding-left 0.3s ease', // 添加过渡效果
+                    display: 'flex',
+                    justifyContent: 'center', // 水平居中
+                    alignItems: 'center'
+                }}
+            >
+                <AddEvent />
+            </Box>
+        </Box>
     );
 }
