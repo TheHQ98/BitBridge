@@ -1,35 +1,19 @@
-
-
-import Timeline from '@mui/lab/Timeline';
-import TimelineItem from '@mui/lab/TimelineItem';
-import TimelineSeparator from '@mui/lab/TimelineSeparator';
-import TimelineConnector from '@mui/lab/TimelineConnector';
-import TimelineContent from '@mui/lab/TimelineContent';
-import TimelineDot from '@mui/lab/TimelineDot';
+import { useState } from 'react';
+import { Container } from '@mui/material';
+import DateHeader from '../components/DateHeader.tsx';
+import DailyTaskChain from '../components/DailyTaskChain.tsx';
+import Header from '../components/Header.tsx';
 
 export default function HomeView() {
-  return (
-      <Timeline>
-          <TimelineItem>
-              <TimelineSeparator>
-                  <TimelineDot />
-                  <TimelineConnector />
-              </TimelineSeparator>
-              <TimelineContent>Eat</TimelineContent>
-          </TimelineItem>
-          <TimelineItem>
-              <TimelineSeparator>
-                  <TimelineDot />
-                  <TimelineConnector />
-              </TimelineSeparator>
-              <TimelineContent>Code</TimelineContent>
-          </TimelineItem>
-          <TimelineItem>
-              <TimelineSeparator>
-                  <TimelineDot />
-              </TimelineSeparator>
-              <TimelineContent>Sleep</TimelineContent>
-          </TimelineItem>
-      </Timeline>
-  );
+    const [selectedDate, setSelectedDate] = useState(new Date());
+
+    // const [chains, setChains] = useState<Chain>();
+    const [containers, setContainers] = useState<string[]>(["114", "514"]) // each item will be uuid to a multitask
+    return (
+        <Container>
+            <Header />
+            <DateHeader selectedDate={selectedDate} onDateSelect={setSelectedDate} />
+            <DailyTaskChain selectedDate={selectedDate} />
+        </Container>
+    );
 }

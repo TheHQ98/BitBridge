@@ -6,6 +6,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
+import {initializeEvents} from "./utils.tsx";
 
 const HomeView = lazy(() => import('./views/HomeView'));
 const RootView = lazy(() => import('./views/RootView'));
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
 );
 
 export default function App() {
+    initializeEvents();
   return (
     <Suspense>
       <CssBaseline />
