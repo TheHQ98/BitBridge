@@ -1,23 +1,19 @@
-import React, { useState } from 'react';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton, Box } from '@mui/material';
+import { useState } from 'react';
+import { List, ListItem, IconButton, Box, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AddEvent from "./AddEvent.tsx";
-import { useNavigate } from 'react-router-dom';
+import { To, useNavigate} from 'react-router-dom';
+import {DndContext} from "@dnd-kit/core";
+import DraggableCard from "./DraggableCard.tsx";
+import DraggableContianer from "./DraggableContianer.tsx";
+import CardsContainer from "./DraggableContianer.tsx";
 
 export default function Header() {
-    const [isOpen, setIsOpen] = useState(false);
+    const [, setIsOpen] = useState(false);
     const [isWide, setIsWide] = useState(false); // 新增状态用于控制宽度
 
     const navigate = useNavigate();
-
-    const toggleDrawer = (open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
-        setIsOpen(open);
-    };
-
-    const handleNavigate = (path) => {
+    const handleNavigate = (path: To) => {
         navigate(path);
         setIsOpen(false);
     };
@@ -39,6 +35,7 @@ export default function Header() {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center', // 将内容水平居中
+                zIndex:2000
             }}
         >
             <Box
@@ -47,17 +44,26 @@ export default function Header() {
                     width: '100%', // 使滚动区域填满 Header 宽度
                 }}
             >
-                <List>
-                    <ListItem sx={{ height: '3vw' }} />
-                    {['Item 1', 'Item 2', 'Item 3', 'Item 1', 'Item 2', 'Item 3', 'Item 1', 'Item 2', 'Item 3'].map((text, index) => (
-                        <ListItem button key={text} onClick={() => handleNavigate(`/path${index + 1}`)}>
-                            <ListItemText sx = {{
-                                textAlign: 'center',
-                                height: isWide ? '3vw' : '10px',
-                            }} primary={text}/>
-                        </ListItem>
-                    ))}
-                </List>
+                <div>
+                    <CardsContainer/>
+                </div>
+
+                {/*<DndContext>*/}
+                {/*    <DraggableCard id="1" content="Task 1" />*/}
+                {/*    <DraggableCard id="2" content="Task 2" />*/}
+                {/*    /!* Add more draggable cards as needed *!/*/}
+                {/*</DndContext>*/}
+                {/*<List>*/}
+                {/*    <ListItem sx={{ height: '3vw' }} />*/}
+                {/*    {['Item 1', 'Item 2', 'Item 3', 'Item 1', 'Item 2', 'Item 3', 'Item 1', 'Item 2', 'Item 3'].map((text, index) => (*/}
+                {/*        <ListItem button key={text} onClick={() => handleNavigate(`/path${index + 1}`)}>*/}
+                {/*            <ListItemText sx = {{*/}
+                {/*                textAlign: 'center',*/}
+                {/*                height: isWide ? '3vw' : '10px',*/}
+                {/*            }} primary={text}/>*/}
+                {/*        </ListItem>*/}
+                {/*    ))}*/}
+                {/*</List>*/}
             </Box>
             <Box
                 sx={{
