@@ -9,7 +9,7 @@ const Timetable: React.FC = () => {
     ];
 
     return (
-        <div>
+        <div style={{position:"absolute", top:"15vh",}}>
             {timeRange.map((time, index) => (
                 <div key={index} style={{
                     display: 'flex', alignItems: 'center', lineHeight: '4.5',  opacity: 0.3  }}>
