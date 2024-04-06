@@ -7,6 +7,8 @@ import Header from '../components/Header.tsx';
 export default function HomeView() {
     const [selectedDate, setSelectedDate] = useState(new Date());
 
+    // const [chains, setChains] = useState<Chain>();
+    const [containers, setContainers] = useState<string[]>(["114", "514"]) // each item will be uuid to a multitask
     return (
         <Container>
             <Header />
