@@ -2,6 +2,7 @@ import  { useState } from 'react';
 import { List, ListItem, IconButton, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AddEvent from "./AddEvent.tsx";
+import MergeEvents from "./MergeEvents";
 
 export default function Header() {
     const [isWide, setIsWide] = useState(false); // 新增状态用于控制宽度
@@ -61,6 +62,7 @@ export default function Header() {
                 }}
             >
                 <AddEvent />
+                <MergeEvents />
             </Box>
         </Box>
     );

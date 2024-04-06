@@ -36,8 +36,8 @@ export function getEventsJsonStr(): string {
     return JSON.stringify(events, null, 2);
 }
 
-export function getEventsJson(){
-    return localStorage.getItem("newEventDetails");
+export function getEventsJson() {
+    return localStorage.getItem('newEventDetails');
 }
 
 export function initializeEvents(): void {

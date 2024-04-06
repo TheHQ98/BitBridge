@@ -50,7 +50,6 @@ export default function AddEvent() {
         setStartTimeValue(null);
         setEndTimeValue(null);
     }
-
     return (
         <Box>
             <Button
