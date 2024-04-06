@@ -1,25 +1,13 @@
-import { useState } from 'react';
-import { List, ListItem, IconButton, Box, ListItemText } from '@mui/material';
 import  { useState } from 'react';
-import { List, ListItem, IconButton, Box } from '@mui/material';
+import { IconButton, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AddEvent from "./AddEvent.tsx";
-import { To, useNavigate} from 'react-router-dom';
-import {DndContext} from "@dnd-kit/core";
-import DraggableCard from "./DraggableCard.tsx";
-import DraggableContianer from "./DraggableContianer.tsx";
 import CardsContainer from "./DraggableContianer.tsx";
 import MergeEvents from "./MergeEvents";
 
 export default function Header() {
-    const [, setIsOpen] = useState(false);
     const [isWide, setIsWide] = useState(false); // 新增状态用于控制宽度
 
-    const navigate = useNavigate();
-    const handleNavigate = (path: To) => {
-        navigate(path);
-        setIsOpen(false);
-    };
 
     const handleToggleWidth = () => {
         setIsWide(!isWide);
