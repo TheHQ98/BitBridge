@@ -12,7 +12,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import {Dayjs} from 'dayjs';
 import {DemoContainer} from "@mui/x-date-pickers/internals/demo";
-import {createEvent, getEventsJsonStr} from "../utils.tsx"
+import {createEvent} from "../utils.tsx"
 
 
 export default function AddEvent() {
@@ -42,10 +42,6 @@ export default function AddEvent() {
             startTimeValue ? startTimeValue.format('YYYY-MM-DD HH:mm:ss') : '',
             endTimeValue ? endTimeValue.format('YYYY-MM-DD HH:mm:ss') : '',
             notes);
-
-        console.log(getEventsJsonStr());
-        localStorage.setItem('newEventDetails', getEventsJsonStr());
-
 
 
         handleDialogClose();

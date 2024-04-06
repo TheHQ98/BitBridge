@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Container } from '@mui/material';
 import DateHeader from '../components/DateHeader.tsx';
 import DailyTaskChain from '../components/DailyTaskChain.tsx';

@@ -1,26 +1,11 @@
-import React, { useState } from 'react';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton, Box } from '@mui/material';
+import  { useState } from 'react';
+import { List, ListItem, IconButton, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AddEvent from "./AddEvent.tsx";
-import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
-    const [isOpen, setIsOpen] = useState(false);
     const [isWide, setIsWide] = useState(false); // 新增状态用于控制宽度
 
-    const navigate = useNavigate();
-
-    const toggleDrawer = (open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
-        setIsOpen(open);
-    };
-
-    const handleNavigate = (path) => {
-        navigate(path);
-        setIsOpen(false);
-    };
 
     const handleToggleWidth = () => {
         setIsWide(!isWide);
@@ -49,14 +34,6 @@ export default function Header() {
             >
                 <List>
                     <ListItem sx={{ height: '3vw' }} />
-                    {['Item 1', 'Item 2', 'Item 3', 'Item 1', 'Item 2', 'Item 3', 'Item 1', 'Item 2', 'Item 3'].map((text, index) => (
-                        <ListItem button key={text} onClick={() => handleNavigate(`/path${index + 1}`)}>
-                            <ListItemText sx = {{
-                                textAlign: 'center',
-                                height: isWide ? '3vw' : '10px',
-                            }} primary={text}/>
-                        </ListItem>
-                    ))}
                 </List>
             </Box>
             <Box
