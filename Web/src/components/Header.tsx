@@ -33,7 +33,7 @@ export default function Header() {
                 top: 0,
                 left: 0,
                 width: isWide ? '40vw' : '10vw',
-                backgroundColor: 'pink',
+                background: 'linear-gradient(to right, #4F6CBA, #AD86D2)',
                 height: '100vh',
                 transition: 'width 0.3s ease',
                 display: 'flex',

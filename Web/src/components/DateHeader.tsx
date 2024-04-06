@@ -2,6 +2,7 @@ import React from 'react';
 import { IconButton, Button, Stack, Typography, Grid } from '@mui/material';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import Timetable from "./Timetable.tsx";
 
 type DateHeaderProps = {
     startOfWeek?: number;
@@ -74,6 +75,7 @@ const DateHeader: React.FC<DateHeaderProps> = ({ startOfWeek = 1, selectedDate, 
                     <NavigateNextIcon />
                 </IconButton>
             </Grid>
+            <Timetable /> {/* 将 Timetable 放在 DateHeader 下方 */}
         </Stack>
     );
 };
